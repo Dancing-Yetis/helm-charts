@@ -1,0 +1,6 @@
+apiVersion: v2
+name: traefik-listener
+description: A Helm chart to setup IngressRoute and Certificate resources
+type: application
+version: 0.0.1
+appVersion: "0.0.1"

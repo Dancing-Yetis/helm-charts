@@ -1,0 +1,45 @@
+# $schema: ./values.schema.json
+# helm-schema-args: --schema-root.additional-properties=false
+
+# @schema type:[string, null]
+# -- Name prefix to use in any IngressRoute or Certificate resources
+name: ""
+
+# @schema type:[string, null]
+# -- Namespace to deploy these resources into
+namespace: ""
+
+# @schema type:[string]
+# -- Host to match route requests and generate Certificate for
+hostname: ""
+
+# @schema type:[array, null]
+# -- List of alt names to attach to the certificate
+alt_names: ["abc", "def"]
+
+# @schema type:[boolean, null]
+# -- Redirect middleware
+force_redirect: false
+
+# @schema type:[array, null]
+# -- List of entrypoints to create IngressRoutes for
+entryPoints:
+  # @schema type:[string, null]
+  # -- Name of Traefik entrypoint to bind this route to
+  - name: "web"
+    # @schema type:[array, null]
+    # -- List of middlewares to associate with this IngressRoute
+    middlewares: []
+    # @schema type:[array, null]
+    # -- List of Service that should respond to this rule
+    services:
+      # @schema type:[string, null]
+      # -- Name of the Service to route to
+      - name: ""
+        # @schema type:[integer, null]
+        # -- ContainerPort to target
+        port: 80
+
+    # @schema type:[boolean, null]
+    # -- Enable TLS on this entrypoint
+    tls: true

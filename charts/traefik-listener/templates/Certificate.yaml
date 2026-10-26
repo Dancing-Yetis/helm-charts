@@ -1,0 +1,33 @@
+{{- $root := . }}
+{{- $namePrefix := "traefik-listener.namePrefix" }}
+{{- $hostname := .Values.hostname -}}
+{{- $namespace := .Values.namespace -}}
+{{- $altNames := .Values.alt_names -}}
+{{- range .Values.entryPoints }}
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name:  "{{ include "traefik-listener.namePrefix" $root }}-tls"
+  {{- if $namespace -}}
+  namespace: {{ $namespace }}
+  {{- end }}
+spec:
+  secretName: "{{ include "traefik-listener.namePrefix" $root }}-tls"
+  privateKey:
+    rotationPolicy: Always
+  commonName: {{ $hostname }}
+  {{ if $altNames | len -}}
+  dnsNames: |
+    {{- range $altNames }}
+    - {{ . }}
+    {{- end }}
+  {{- end }}
+  usages:
+    - digital signature
+    - key encipherment
+    - server auth
+  issuerRef:
+    name: letsencrypt-production
+    kind: ClusterIssuer
+{{- end }}

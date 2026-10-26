@@ -1,2 +1,4 @@
 # helm-charts
-Curated helm-chart collection for homelabs
+
+Janky helm-chart collection for homelab
+
