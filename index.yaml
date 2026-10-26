@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  onepass-secret:
+  - apiVersion: v2
+    appVersion: 0.0.1
+    created: "2026-10-26T23:54:05.969696691Z"
+    description: Deploy a secret from a 1password connect server using external-secrets
+    digest: 09a8c018ffbfe5503d7e59828070e6ec4ce1a369b81910ee88494d46ed4fbf94
+    name: onepass-secret
+    type: application
+    urls:
+    - https://github.com/Dancing-Yetis/helm-charts/releases/download/onepass-secret-0.0.1/onepass-secret-0.0.1.tgz
+    version: 0.0.1
   traefik-listener:
   - apiVersion: v2
     appVersion: 0.0.1
@@ -11,4 +22,4 @@ entries:
     urls:
     - https://github.com/Dancing-Yetis/helm-charts/releases/download/traefik-listener-0.0.1/traefik-listener-0.0.1.tgz
     version: 0.0.1
-generated: "2026-10-26T23:03:27.2991126Z"
+generated: "2026-10-26T23:54:05.969705708Z"
