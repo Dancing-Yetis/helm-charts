@@ -1,0 +1,33 @@
+# $schema: ./values.schema.json
+
+# @schema required: true
+# @schema type:[string]
+# -- Namespace to deploy the secret into 
+namespace: "default"
+
+# @schema required: true
+# @schema type:[string]
+# -- ClusterSecretStore to sync from
+cluster_secret_store: "k8s"
+
+# @schema type:[array]
+secrets:
+
+  # @schema type:[string]
+  # -- Name to provide the Secret
+  - name: "my_cool_secret"
+
+    # @schema type:[array, null]
+    # -- List of keys to sync
+    data: 
+
+      # @schema type:[string]
+      # -- Name of the key in our generated secret
+      - secretKey: ""
+
+        # @schema type:[string]
+        # -- Name of the Onepassword Secret to sync from
+        key: ""
+        # @schema type:[string]
+        # -- What property inside the Onepassword Item to assign to our secret name
+        property: ""

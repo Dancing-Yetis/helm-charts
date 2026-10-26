@@ -1,0 +1,54 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "https://github.com/Dancing-Yetis/helm-charts",
+    "type": "object",
+    "required": [
+        "namespace",
+        "cluster_secret_store"
+    ],
+    "properties": {
+        "cluster_secret_store": {
+            "description": "ClusterSecretStore to sync from",
+            "type": "string"
+        },
+        "namespace": {
+            "description": "Namespace to deploy the secret into ",
+            "type": "string"
+        },
+        "secrets": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "data": {
+                        "description": "List of keys to sync",
+                        "type": [
+                            "array",
+                            "null"
+                        ],
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "key": {
+                                    "description": "Name of the Onepassword Secret to sync from",
+                                    "type": "string"
+                                },
+                                "property": {
+                                    "description": "What property inside the Onepassword Item to assign to our secret name",
+                                    "type": "string"
+                                },
+                                "secretKey": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    },
+    "additionalProperties": false
+}
