@@ -16,7 +16,7 @@ spec:
   privateKey:
     rotationPolicy: Always
   commonName: {{ $service }}.{{ $domain }}
-  dnsNames: |
+  dnsNames:
     - {{ $service }}.{{ $domain }}
     {{- range $altNames }}
     - {{ . }}
