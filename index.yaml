@@ -14,6 +14,17 @@ entries:
   traefik-listener:
   - apiVersion: v2
     appVersion: 0.0.1
+    created: "2026-10-27T22:29:01.065366649Z"
+    description: A Helm chart to setup IngressRoute and Certificate resources
+    digest: 51249a21f219d49f87b38a740521ffd2a1685211d5ab5e1778b878bb22efc8fc
+    icon: https://avatars.githubusercontent.com/u/342600907
+    name: traefik-listener
+    type: application
+    urls:
+    - https://github.com/Dancing-Yetis/helm-charts/releases/download/traefik-listener-0.0.3/traefik-listener-0.0.3.tgz
+    version: 0.0.3
+  - apiVersion: v2
+    appVersion: 0.0.1
     created: "2026-10-27T13:24:41.859023981Z"
     description: A Helm chart to setup IngressRoute and Certificate resources
     digest: d882210f0474f733f7026fd40bf14f74ce4eb8548369f028c905a961f18fc647
@@ -32,4 +43,4 @@ entries:
     urls:
     - https://github.com/Dancing-Yetis/helm-charts/releases/download/traefik-listener-0.0.1/traefik-listener-0.0.1.tgz
     version: 0.0.1
-generated: "2026-10-27T13:24:41.859034006Z"
+generated: "2026-10-27T22:29:01.065378186Z"
