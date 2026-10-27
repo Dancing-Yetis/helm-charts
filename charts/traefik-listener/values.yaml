@@ -1,45 +1,61 @@
 # $schema: ./values.schema.json
 # helm-schema-args: --schema-root.additional-properties=false
 
-# @schema type:[string, null]
-# -- Name prefix to use in any IngressRoute or Certificate resources
-name: ""
+# @schema type:[string]
+# @schema required: true
+# -- Service name to use in any IngressRoute or Certificate resources
+service: ""
 
 # @schema type:[string, null]
 # -- Namespace to deploy these resources into
 namespace: ""
 
 # @schema type:[string]
+# @schema required: true
 # -- Host to match route requests and generate Certificate for
 hostname: ""
 
 # @schema type:[array, null]
 # -- List of alt names to attach to the certificate
-alt_names: ["abc", "def"]
+alt_names: []
 
-# @schema type:[boolean, null]
-# -- Redirect middleware
-force_redirect: false
+# @schema type:[boolean]
+# -- Enable redirect middleware on web port
+force_redirect: true
+
+# @schema type:[boolean]
+# -- Enable compression on non-web ports
+force_compression: true
 
 # @schema type:[array, null]
-# -- List of entrypoints to create IngressRoutes for
+# -- List of entrypoints to create IngressRoutes for. (e.g.: "web", "websecure")
 entryPoints:
-  # @schema type:[string, null]
+
+  # @schema type:[string]
   # -- Name of Traefik entrypoint to bind this route to
-  - name: "web"
+  - name: "websecure"
+
     # @schema type:[array, null]
     # -- List of middlewares to associate with this IngressRoute
     middlewares: []
-    # @schema type:[array, null]
+
+    # @schema type:[array]
     # -- List of Service that should respond to this rule
     services:
-      # @schema type:[string, null]
+
+      # @schema type:[string]
       # -- Name of the Service to route to
-      - name: ""
-        # @schema type:[integer, null]
+      - name: "{{ .Values.service }}"
+
+        # @schema type:[integer]
         # -- ContainerPort to target
         port: 80
 
-    # @schema type:[boolean, null]
+    # @schema type:[boolean]
     # -- Enable TLS on this entrypoint
     tls: true
+
+  - name: "web"
+    services:
+      - name: "{{ .Values.service }}"
+        port: 80

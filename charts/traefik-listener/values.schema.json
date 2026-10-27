@@ -2,6 +2,10 @@
     "$schema": "http://json-schema.org/draft-07/schema#",
     "$id": "https://github.com/Dancing-Yetis/helm-charts",
     "type": "object",
+    "required": [
+        "service",
+        "hostname"
+    ],
     "properties": {
         "alt_names": {
             "description": "List of alt names to attach to the certificate",
@@ -11,7 +15,7 @@
             ]
         },
         "entryPoints": {
-            "description": "List of entrypoints to create IngressRoutes for",
+            "description": "List of entrypoints to create IngressRoutes for. (e.g.: \"web\", \"websecure\")",
             "type": [
                 "array",
                 "null"
@@ -31,10 +35,7 @@
                     },
                     "services": {
                         "description": "List of Service that should respond to this rule",
-                        "type": [
-                            "array",
-                            "null"
-                        ],
+                        "type": "array",
                         "items": {
                             "type": "object",
                             "properties": {
@@ -43,49 +44,29 @@
                                 },
                                 "port": {
                                     "description": "ContainerPort to target",
-                                    "type": [
-                                        "integer",
-                                        "null"
-                                    ]
+                                    "type": "integer"
                                 }
                             }
                         }
                     },
                     "tls": {
                         "description": "Enable TLS on this entrypoint",
-                        "type": [
-                            "boolean",
-                            "null"
-                        ]
+                        "type": "boolean"
                     }
                 }
             }
         },
-        "force_redirect": {
-            "description": "Redirect middleware",
-            "type": [
-                "boolean",
-                "null"
-            ]
+        "force_compression": {
+            "description": "Enable compression on non-web ports",
+            "type": "boolean"
         },
-        "global": {
-            "description": "Global values shared between all subcharts",
-            "$comment": "Added automatically by 'helm schema' to allow this chart to be used as a Helm dependency, as this schema would otherwise not allow Helm's special 'global' values key.",
-            "type": [
-                "object",
-                "null"
-            ]
+        "force_redirect": {
+            "description": "Enable redirect middleware on web port",
+            "type": "boolean"
         },
         "hostname": {
             "description": "Host to match route requests and generate Certificate for",
             "type": "string"
-        },
-        "name": {
-            "description": "Name prefix to use in any IngressRoute or Certificate resources",
-            "type": [
-                "string",
-                "null"
-            ]
         },
         "namespace": {
             "description": "Namespace to deploy these resources into",
@@ -93,6 +74,10 @@
                 "string",
                 "null"
             ]
+        },
+        "service": {
+            "description": "Service name to use in any IngressRoute or Certificate resources",
+            "type": "string"
         }
     },
     "additionalProperties": false

@@ -1,0 +1,29 @@
+{{- $root := . }}
+{{- $namePrefix := "traefik-listener.namePrefix" }}
+{{- $hostname := .Values.hostname -}}
+{{- $namespace := .Values.namespace -}}
+{{- $altNames := .Values.alt_names -}}
+{{- if .Values.force_redirect -}}
+---
+# HTTP to HTTPS redirect
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ $namePrefix }}-redirect
+  namespace: {{ $namespace }}
+spec:
+  redirectScheme:
+    scheme: https
+    permanent: true
+{{- end }}
+{{- if .Values.force_compression }}
+---
+# Compression middleware
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+metadata:
+  name: {{ $namePrefix }}-compress
+  namespace: {{ $namespace }}
+spec:
+  compress: {}
+{{- end }}

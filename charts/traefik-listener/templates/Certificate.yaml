@@ -3,13 +3,12 @@
 {{- $hostname := .Values.hostname -}}
 {{- $namespace := .Values.namespace -}}
 {{- $altNames := .Values.alt_names -}}
-{{- range .Values.entryPoints }}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name:  "{{ include "traefik-listener.namePrefix" $root }}-tls"
-  {{- if $namespace -}}
+  {{- if $namespace }}
   namespace: {{ $namespace }}
   {{- end }}
 spec:
@@ -17,12 +16,11 @@ spec:
   privateKey:
     rotationPolicy: Always
   commonName: {{ $hostname }}
-  {{ if $altNames | len -}}
   dnsNames: |
+    - {{ $hostname }}
     {{- range $altNames }}
     - {{ . }}
     {{- end }}
-  {{- end }}
   usages:
     - digital signature
     - key encipherment
@@ -30,4 +28,3 @@ spec:
   issuerRef:
     name: letsencrypt-production
     kind: ClusterIssuer
-{{- end }}

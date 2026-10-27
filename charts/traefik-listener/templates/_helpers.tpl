@@ -11,7 +11,7 @@ is not specified.
 */}}
 {{- define "traefik-listener.namePrefix" -}}
 {{- $values := .Values | default dict -}}
-{{- $values.name | default .Release.Name -}}
+{{- $values.service | default .Release.Name -}}
 {{- end }}
 
 {{/*
