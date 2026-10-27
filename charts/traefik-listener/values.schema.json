@@ -4,7 +4,7 @@
     "type": "object",
     "required": [
         "service",
-        "hostname"
+        "domain"
     ],
     "properties": {
         "alt_names": {
@@ -13,6 +13,10 @@
                 "array",
                 "null"
             ]
+        },
+        "domain": {
+            "description": "Root domain to append service name to for request routing and certificate generation",
+            "type": "string"
         },
         "entryPoints": {
             "description": "List of entrypoints to create IngressRoutes for. (e.g.: \"web\", \"websecure\")",
@@ -65,7 +69,6 @@
             "type": "boolean"
         },
         "hostname": {
-            "description": "Host to match route requests and generate Certificate for",
             "type": "string"
         },
         "namespace": {

@@ -12,8 +12,8 @@ namespace: ""
 
 # @schema type:[string]
 # @schema required: true
-# -- Host to match route requests and generate Certificate for
-hostname: ""
+# -- Apex domain to append service name to for request routing and certificate generation
+domain: ""
 
 # @schema type:[array, null]
 # -- List of alt names to attach to the certificate
@@ -59,3 +59,4 @@ entryPoints:
     services:
       - name: "{{ .Values.service }}"
         port: 80
+

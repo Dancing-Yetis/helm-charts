@@ -1,0 +1,6 @@
+service: "grafana"
+namespace: "grafana"
+domain: "lab.loves-to.dev"
+force_redirect: true
+force_compression: true
+

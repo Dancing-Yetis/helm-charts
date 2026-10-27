@@ -1,23 +1,23 @@
 {{- $root := . }}
-{{- $namePrefix := "traefik-listener.namePrefix" }}
-{{- $hostname := .Values.hostname -}}
+{{- $service := .Values.service -}}
+{{- $domain := .Values.domain -}}
 {{- $namespace := .Values.namespace -}}
 {{- $altNames := .Values.alt_names -}}
 ---
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name:  "{{ include "traefik-listener.namePrefix" $root }}-tls"
+  name:  "{{ $service }}-tls"
   {{- if $namespace }}
   namespace: {{ $namespace }}
   {{- end }}
 spec:
-  secretName: "{{ include "traefik-listener.namePrefix" $root }}-tls"
+  secretName: "{{ $service }}-tls"
   privateKey:
     rotationPolicy: Always
-  commonName: {{ $hostname }}
+  commonName: {{ $service }}.{{ $domain }}
   dnsNames: |
-    - {{ $hostname }}
+    - {{ $service }}.{{ $domain }}
     {{- range $altNames }}
     - {{ . }}
     {{- end }}

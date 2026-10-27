@@ -9,6 +9,7 @@ A Helm chart to setup IngressRoute and Certificate resources
 | Key | Type | Default | Description |
 |-----|------|---------|-------------|
 | alt_names | list | `[]` | List of alt names to attach to the certificate |
+| domain | string | `""` | Apex domain to append service name to for request routing and certificate generation |
 | entryPoints | list | `[{"middlewares":[],"name":"websecure","services":[{"name":"{{ .Values.service }}","port":80}],"tls":true},{"name":"web","services":[{"name":"{{ .Values.service }}","port":80}]}]` | List of entrypoints to create IngressRoutes for. (e.g.: "web", "websecure") |
 | entryPoints[0] | object | `{"middlewares":[],"name":"websecure","services":[{"name":"{{ .Values.service }}","port":80}],"tls":true}` | Name of Traefik entrypoint to bind this route to |
 | entryPoints[0].middlewares | list | `[]` | List of middlewares to associate with this IngressRoute |
@@ -18,7 +19,6 @@ A Helm chart to setup IngressRoute and Certificate resources
 | entryPoints[0].tls | bool | `true` | Enable TLS on this entrypoint |
 | force_compression | bool | `true` | Enable compression on non-web ports |
 | force_redirect | bool | `true` | Enable redirect middleware on web port |
-| hostname | string | `""` | Host to match route requests and generate Certificate for |
 | namespace | string | `""` | Namespace to deploy these resources into |
 | service | string | `""` | Service name to use in any IngressRoute or Certificate resources |
 

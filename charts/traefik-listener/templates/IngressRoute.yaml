@@ -1,9 +1,8 @@
-{{- $root := . -}}
-{{- $service := "traefik-listener.namePrefix" -}}
+{{- $namespace := .Values.namespace -}}
+{{- $service := .Values.service -}}
+{{- $domain := .Values.domain -}}
 {{- $forceRedirect := .Values.force_redirect -}}
 {{- $forceCompression := .Values.force_compression -}}
-{{- $hostname := .Values.hostname -}}
-{{- $namespace := .Values.namespace -}}
 {{- range .Values.entryPoints }}
 ---
 apiVersion: traefik.io/v1alpha1
@@ -17,9 +16,9 @@ spec:
   entryPoints:
     - {{ .name }}
   routes:
-    - match: Host(`{{ $hostname }}`)
+    - match: Host(`{{ $service }}.{{ $domain }}`)
       kind: Rule
-      {{- if or (.middlewares | len) (and $forceRedirect .name "web") (and $forceCompression ne .name "web") }}
+      {{- if or (.middlewares | list | len) (and $forceRedirect .name "web") (and $forceCompression ne .name "web") }}
       middlewares:
         {{- if and (eq .name "web") ($forceRedirect) }}
         - name: "{{ $service }}-redirect"
@@ -33,7 +32,7 @@ spec:
       {{- end }}
       services:
         {{ range .services -}}
-        - name: {{ tpl .name $service }}
+        - name: {{ $service }}
           port: {{ .port }}
         {{- end }}
   {{- if .tls }}
